@@ -1,0 +1,28 @@
+  struct Student *s = loadStudents(&n);
+    if (!s) { s = malloc(sizeof(struct Student)); if (!s) { perror("malloc"); return 1; } n = 0; }
+    while (1) {
+        int c;
+        printf("\n1.List\n2.Add\n3.Mark\n4.Percent\n5.Exit\nChoice: ");
+        if (scanf("%d", &c) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid choice.\n");
+            continue;
+        }
+        if (c == 1) {
+            for (int i = 0; i < n; i++)
+                printf("%lld | %s\n", s[i].id, s[i].name);
+        } else if (c == 2) {
+            addStudent(&s, &n);
+        } else if (c == 3) {
+            markAttendance(s, n);
+        } else if (c == 4) {
+            showPercent(s, n);
+        } else if (c == 5) {
+            saveStudents(s, n);
+            free(s);
+            return 0;
+        } else {
+            printf("Unknown choice.\n");
+        }
+    }
+}
