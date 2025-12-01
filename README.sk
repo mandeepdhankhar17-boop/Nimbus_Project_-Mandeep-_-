@@ -1,0 +1,75 @@
+return;
+}
+*s = tmp;
+(*s)[*n].id = id;
+strncpy((*s)[*n].name, name,MAXN-1);
+(*s)[*n].name[MAXN-1] ='\0';
+(*n)++;
+saveStudents(*s, *n);
+printf("Added.\n");
+}
+
+void markAttendance(struct student *s, int n) {
+    if (n == 0) {
+        printf("No students to mark.\n");
+        return;
+    }
+    char date[MAXD];
+    printf("Date (YYYY-MM-DD):");
+    if (scanf("%14s", date)!= 1) {//width to avoid overflow
+        printf("Invalid date.\n");
+    while (getchar() != '\n');
+return;
+}
+int *present = calloc(n, sizeof(int));
+if (!present) { perror("calloc");
+return; }
+long long id;
+printf("Enter present IDs (0 to stop):\n");
+while(1) {
+    if(scanf("%lld", &id) != 1) {
+        while (getchar() !='\n');
+         //discard bad input 
+         printf("Invalid nnput, try again. \n");
+         continue;
+    }
+    if(id == 0) break;
+    int found = 0;
+    for (int i = 0; i<n; i++) {
+        present[i] = 1;
+        found = 1;
+        break;
+    }
+}
+if (!found) printf("ID %lld not found; ignored.\n", id);
+}
+FILE *f = fopen("attendance.log", "a");
+if (!f) {
+    perror("Failed to open attendance.log");
+    free(present);
+    return;
+}
+for (int i = 0; i<n;i++)
+fprintf(f, "%lld|%s|%c\n", s[i].id,
+date, present[i] ? 'P' : 'A');
+fclose(f);
+free(present);
+printf("Attendance saved.\n");
+}
+
+struct Record* loadRecords(int *r) {
+    FILE *f = fopen("attendance.log","r");
+    *r = 0;
+    if (!f) return NULL;
+    int cap = 20;
+    struct Record *rec = malloc(cap *
+    sizeof(struct Record));
+    if (!rec) { fclose(f); return NULL;}
+    CHAR LINE[200];
+    While (fgets(line, sizeof(line),f)) {
+        char *p1 = strchr(line, 'l');
+        char *p2 = (p1 ? strrchr(line, 'l'): NULL);
+        if (!P1 || !P2 || P1 == P2)
+        continue; // malformed line-> skip
+    /* terminate pieces */
+    *p1 = '\0';
